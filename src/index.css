@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+@layer base {
+  :root {
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --app-highlight-bg: rgba(0, 0, 0, 0.08);
+    --app-highlight-hover: rgba(0, 0, 0, 0.04);
+    --app-highlight-border: rgba(0, 0, 0, 0.12);
+    --app-highlight-text: #18181b;
+  }
+
+  :root[data-theme="dark"],
+  .dark {
+    --app-highlight-bg: rgba(255, 255, 255, 0.12);
+    --app-highlight-hover: rgba(255, 255, 255, 0.06);
+    --app-highlight-border: rgba(255, 255, 255, 0.15);
+    --app-highlight-text: #fafafa;
+  }
+
+  /* Gray palette (default: transparent black in light mode, neutral gray in dark mode) */
+  :root[data-highlight="gray"] {
+    --app-highlight-bg: rgba(0, 0, 0, 0.08);
+    --app-highlight-hover: rgba(0, 0, 0, 0.04);
+    --app-highlight-border: rgba(0, 0, 0, 0.12);
+    --app-highlight-text: #18181b;
+  }
+  :root[data-highlight="gray"][data-theme="dark"],
+  .dark[data-highlight="gray"],
+  .dark :root[data-highlight="gray"] {
+    --app-highlight-bg: rgba(255, 255, 255, 0.12);
+    --app-highlight-hover: rgba(255, 255, 255, 0.06);
+    --app-highlight-border: rgba(255, 255, 255, 0.15);
+    --app-highlight-text: #fafafa;
+  }
+
+  /* Slate palette */
+  :root[data-highlight="slate"] {
+    --app-highlight-bg: rgba(51, 65, 85, 0.12);
+    --app-highlight-hover: rgba(51, 65, 85, 0.06);
+    --app-highlight-border: rgba(51, 65, 85, 0.20);
+    --app-highlight-text: #0f172a;
+  }
+  :root[data-highlight="slate"][data-theme="dark"],
+  .dark[data-highlight="slate"],
+  .dark :root[data-highlight="slate"] {
+    --app-highlight-bg: rgba(148, 163, 184, 0.18);
+    --app-highlight-hover: rgba(148, 163, 184, 0.08);
+    --app-highlight-border: rgba(148, 163, 184, 0.22);
+    --app-highlight-text: #f8fafc;
+  }
+
+  /* Zinc palette */
+  :root[data-highlight="zinc"] {
+    --app-highlight-bg: rgba(39, 39, 42, 0.10);
+    --app-highlight-hover: rgba(39, 39, 42, 0.05);
+    --app-highlight-border: rgba(39, 39, 42, 0.18);
+    --app-highlight-text: #18181b;
+  }
+  :root[data-highlight="zinc"][data-theme="dark"],
+  .dark[data-highlight="zinc"],
+  .dark :root[data-highlight="zinc"] {
+    --app-highlight-bg: rgba(228, 228, 231, 0.16);
+    --app-highlight-hover: rgba(228, 228, 231, 0.07);
+    --app-highlight-border: rgba(228, 228, 231, 0.20);
+    --app-highlight-text: #fafafa;
+  }
+}
+
+/* Custom scrollbars for a clean desktop feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* App Highlight Styles:
+   Light mode: transparent black (black/5 to black/12)
+   Dark mode: neutral gray (white/8 to white/15)
+   Customizable via settings (Gray / Slate / Zinc)
+*/
+.app-highlight-active {
+  background-color: var(--app-highlight-bg) !important;
+  color: var(--app-highlight-text) !important;
+  border-color: var(--app-highlight-border);
+}
+
+.app-highlight-hover:hover {
+  background-color: var(--app-highlight-hover) !important;
+}
+
+.app-border {
+  border-color: var(--app-highlight-border);
+}
+
+/* TipTap Editor Styles */
+.ProseMirror {
+  outline: none;
+  min-height: 250px;
+  line-height: 1.7;
+}
+
+.ProseMirror p {
+  margin-bottom: 0.75rem;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror h1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.ProseMirror ul:not([data-type="taskList"]) {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ProseMirror ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0.75rem;
+}
+
+.ProseMirror ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.35rem;
+}
+
+.ProseMirror ul[data-type="taskList"] li > label {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+  user-select: none;
+  margin-top: 0.2rem;
+}
+
+.ProseMirror ul[data-type="taskList"] li > div {
+  flex: 1 1 auto;
+}
+
+.ProseMirror ul[data-type="taskList"] li[data-checked="true"] > div {
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+.ProseMirror blockquote {
+  border-left: 3px solid #71717a;
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1rem 0;
+  opacity: 0.9;
+}
+.dark .ProseMirror blockquote {
+  border-left-color: #a1a1aa;
+}
+
+.ProseMirror code {
+  background-color: rgba(0, 0, 0, 0.06);
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.35rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+}
+.dark .ProseMirror code {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ProseMirror pre {
+  background-color: #18181b;
+  color: #f4f4f5;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.ProseMirror pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: 0.875rem;
+}
+
+.ProseMirror hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 1.5rem 0;
+}
+.dark .ProseMirror hr {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.ProseMirror a {
+  color: #52525b;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.dark .ProseMirror a {
+  color: #d4d4d8;
+}
+
+/* Print styles for note export */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}

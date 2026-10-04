@@ -1,0 +1,6 @@
+{
+  "name": "Daybook - Offline Notes, Calendar & Tasks",
+  "description": "A privacy-first, fully offline desktop productivity app combining rich text notes, calendar, and tasks with automatic note-to-date linking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
